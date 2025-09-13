@@ -9,12 +9,13 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+A ring oscillator and clock divider is used to generate random numbers by exploiting phase noise in the ring oscillator output. 
 
 ## How to test
 
-Explain how to use your project
+Connect oscilloscope probe to uo_out[0] and observe random bits. 
+For more rigorous test, sample this pin using raspberry pi and log them in a file.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+Oscilloscope and probes
