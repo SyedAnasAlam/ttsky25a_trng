@@ -5,9 +5,7 @@
 
 `default_nettype none
 
-//`define SIM 1
-
-module tt_um_example (
+module tt_um_saa_trng (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
@@ -71,6 +69,6 @@ module tt_um_example (
 `endif
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, 1'b0};
+  wire _unused = &{ena, ui_in[7:5], 1'b0};
 
 endmodule

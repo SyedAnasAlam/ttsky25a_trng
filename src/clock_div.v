@@ -16,7 +16,7 @@ module clock_div #(
   wire [STAGES-1:0] d;
   wire [STAGES-1:0] q_n;
   wire [STAGES-1:0] clk;
-  wire output_tap;
+  reg output_tap;
 
   assign clk_out = output_tap;
 
@@ -25,7 +25,6 @@ module clock_div #(
     
     for(i = 0; i < STAGES; i++) 
     begin
-      
       assign clk[i] = i == 0 ? clk_in : q_n[i-1];
 
     `ifndef SIM
@@ -33,7 +32,7 @@ module clock_div #(
         .d(q_n[i]),
         .q(), // unconnected
         .q_n(q_n[i]),
-        .clk(clk),
+        .clk(clk[i]),
         .rst_n(rst_n)
       );
     `else 
@@ -41,11 +40,10 @@ module clock_div #(
         .d(q_n[i]),
         .q(), // unconnected
         .q_n(q_n[i]),
-        .clk(clk),
+        .clk(clk[i]),
         .rst_n(rst_n)
       );
     `endif       
-
     end
   endgenerate
 
@@ -58,7 +56,7 @@ module clock_div #(
         2'b10: output_tap = q_n[TAP2-1];
         2'b11: output_tap = q_n[TAP3-1];
         default: output_tap = q_n[STAGES-1];
-    endcase;
-  end;
+    endcase
+  end
 
 endmodule

@@ -13,7 +13,7 @@ module ring_oscillator #(
 );
 
   wire [STAGES-1:0] inv_chain;
-  wire feedback_tap;
+  reg feedback_tap;
   wire inv_chain_input = enable & feedback_tap;
 
   assign ro_out = feedback_tap;
@@ -37,9 +37,7 @@ module ring_oscillator #(
           .y(inv_chain[i])
         );
     `endif 
-    
-
-    end;
+    end
   endgenerate
 
   // Multiplexer selecting the feedback point
@@ -51,8 +49,8 @@ module ring_oscillator #(
         2'b10: feedback_tap = inv_chain[TAP2-1];
         2'b11: feedback_tap = inv_chain[TAP3-1];
         default: feedback_tap = inv_chain[STAGES-1];
-    endcase;
-  end;
+    endcase
+  end
 
 
 endmodule 
